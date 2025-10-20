@@ -3,7 +3,12 @@
 // Simple functions to save/load projects
 // ========================================
 
-const API_URL = 'http://localhost:5000/api';
+// Use environment variable for API URL (Vercel deployment) or fallback to localhost
+const API_URL = import.meta.env.VITE_API_URL 
+  ? `${import.meta.env.VITE_API_URL}/api`
+  : 'http://localhost:5000/api';
+
+console.log('🌐 API URL:', API_URL); // Debug log
 
 // Helper function to handle API errors
 const handleResponse = async (response) => {
