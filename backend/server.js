@@ -24,7 +24,29 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Step 6: Middleware (functions that run before routes)
-app.use(cors());                         // Allow requests from React frontend
+// CORS configuration for production
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://cipher-studio-one.vercel.app',
+  'https://cipher-studio-one-git-main-anshuman1600s-projects.vercel.app',
+  'https://cipher-studio-one-anshuman1600s-projects.vercel.app'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || origin.includes('cipher-studio-one') || origin.includes('vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
 app.use(express.json({ limit: '10mb' })); // Parse JSON data (increased limit for large projects)
 
 // Step 7: Connect to MongoDB Database
