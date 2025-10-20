@@ -1,0 +1,79 @@
+.code-editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e1e;
+  overflow: hidden;
+}
+
+.app.light .code-editor {
+  background-color: #ffffff;
+}
+
+.editor-header {
+  padding: 8px 16px;
+  background-color: #2d2d30;
+  border-bottom: 1px solid #3e3e42;
+  display: flex;
+  align-items: center;
+}
+
+/* Remount overlay for editor */
+.editor-remount-overlay {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  z-index: 40;
+}
+
+/* Empty editor message */
+.empty-editor-message {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #858585;
+  text-align: center;
+  padding: 40px;
+}
+
+.empty-editor-message p {
+  margin: 0;
+}
+
+.empty-editor-message p:first-child {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.app.light .empty-editor-message {
+  color: #6e6e6e;
+}
+
+.app.light .editor-header {
+  background-color: #f3f3f3;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.editor-title {
+  font-size: 13px;
+  color: #d4d4d4;
+  font-weight: 500;
+}
+
+.app.light .editor-title {
+  color: #1e1e1e;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .code-editor {
+    min-height: 300px;
+  }
+}

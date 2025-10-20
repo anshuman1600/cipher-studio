@@ -1,0 +1,181 @@
+.auth-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.auth-modal {
+  background-color: #2d2d30;
+  border-radius: 8px;
+  padding: 24px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.app.light .auth-modal {
+  background-color: #ffffff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.auth-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.auth-modal-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.app.light .auth-modal-header h2 {
+  color: #1e1e1e;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #cccccc;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.close-btn:hover {
+  background-color: #3e3e42;
+}
+
+.app.light .close-btn {
+  color: #616161;
+}
+
+.app.light .close-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: #cccccc;
+  font-weight: 500;
+}
+
+.app.light .form-group label {
+  color: #1e1e1e;
+}
+
+.form-group input {
+  padding: 10px 12px;
+  background-color: #3e3e42;
+  border: 1px solid #5a5a5a;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #007acc;
+}
+
+.app.light .form-group input {
+  background-color: #ffffff;
+  color: #1e1e1e;
+  border: 1px solid #d0d0d0;
+}
+
+.app.light .form-group input:focus {
+  border-color: #007acc;
+}
+
+.error-message {
+  padding: 10px;
+  background-color: #5a1d1d;
+  border: 1px solid #f48771;
+  border-radius: 4px;
+  color: #f48771;
+  font-size: 13px;
+}
+
+.app.light .error-message {
+  background-color: #ffe6e6;
+  border: 1px solid #ff4d4d;
+  color: #d32f2f;
+}
+
+.submit-btn {
+  padding: 12px;
+  background-color: #007acc;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #005a9e;
+}
+
+.submit-btn:disabled {
+  background-color: #555555;
+  cursor: not-allowed;
+}
+
+.app.light .submit-btn:disabled {
+  background-color: #cccccc;
+}
+
+.auth-toggle {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: #cccccc;
+}
+
+.app.light .auth-toggle {
+  color: #616161;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #007acc;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.toggle-btn:hover {
+  color: #005a9e;
+}
