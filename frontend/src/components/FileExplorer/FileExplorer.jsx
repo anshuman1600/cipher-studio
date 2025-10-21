@@ -111,6 +111,25 @@ function FileExplorer({ files, activeFile, selectedItem, onFileSelect, onItemSel
   const [showNewFolderInput, setShowNewFolderInput] = useState(false);
   const [createInPath, setCreateInPath] = useState('');
 
+  // Helper function to check if path is a folder (works for nested paths too)
+  const isFolder = (path) => {
+    if (!path) return false;
+    
+    // Split path and traverse
+    const parts = path.split('/');
+    let current = files;
+    
+    for (const part of parts) {
+      if (!current[part]) return false;
+      if (current[part].type === 'folder') {
+        current = current[part].children || {};
+      } else {
+        return false; // It's a file, not a folder
+      }
+    }
+    return true;
+  };
+
   const handleCreateFile = () => {
     if (newItemName.trim()) {
       onCreateFile(createInPath, newItemName, 'file');
@@ -130,16 +149,16 @@ function FileExplorer({ files, activeFile, selectedItem, onFileSelect, onItemSel
   };
 
   const startCreatingFile = () => {
-    // If a folder is selected, create inside it
-    const path = selectedItem && files[selectedItem]?.type === 'folder' ? selectedItem : '';
+    // If selected item is a folder (even nested), create inside it
+    const path = selectedItem && isFolder(selectedItem) ? selectedItem : '';
     setCreateInPath(path);
     setShowNewFileInput(true);
     setShowNewFolderInput(false);
   };
 
   const startCreatingFolder = () => {
-    // If a folder is selected, create inside it
-    const path = selectedItem && files[selectedItem]?.type === 'folder' ? selectedItem : '';
+    // If selected item is a folder (even nested), create inside it
+    const path = selectedItem && isFolder(selectedItem) ? selectedItem : '';
     setCreateInPath(path);
     setShowNewFolderInput(true);
     setShowNewFileInput(false);

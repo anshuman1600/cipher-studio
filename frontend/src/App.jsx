@@ -256,10 +256,20 @@ function App() {
     let current = newObj;
     
     for (let i = 0; i < keys.length - 1; i++) {
-      if (!current[keys[i]]) {
-        current[keys[i]] = { type: 'folder', children: {} };
+      const key = keys[i];
+      
+      // If key doesn't exist, create folder
+      if (!current[key]) {
+        current[key] = { type: 'folder', children: {} };
       }
-      current = current[keys[i]].children;
+      
+      // If exists but no children property, add it
+      if (!current[key].children) {
+        current[key].children = {};
+      }
+      
+      // Move to children
+      current = current[key].children;
     }
     
     current[keys[keys.length - 1]] = value;
