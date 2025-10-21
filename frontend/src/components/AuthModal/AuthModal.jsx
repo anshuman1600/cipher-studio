@@ -25,24 +25,23 @@ function AuthModal({ onClose, onLogin, onRegister }) {
     setError('');
     setLoading(true);
 
+    // Create a timeout promise (60 seconds for cold start)
+    const timeoutPromise = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Request timeout. Backend is waking up (free tier). Please try again in 30 seconds.')), 60000)
+    );
+
     try {
-      if (isLogin) {
-        // Login
-        await onLogin({
-          email: formData.email,
-          password: formData.password
-        });
-      } else {
-        // Register
-        await onRegister({
-          username: formData.username,
-          email: formData.email,
-          password: formData.password
-        });
-      }
+      const authPromise = isLogin 
+        ? onLogin({ email: formData.email, password: formData.password })
+        : onRegister({ username: formData.username, email: formData.email, password: formData.password });
+
+      // Race between auth and timeout
+      await Promise.race([authPromise, timeoutPromise]);
+      
       onClose();
     } catch (err) {
-      setError(err.message || 'Something went wrong');
+      console.error('Auth error:', err);
+      setError(err.message || 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -116,8 +115,14 @@ function AuthModal({ onClose, onLogin, onRegister }) {
             className="submit-btn" 
             disabled={loading}
           >
-            {loading ? '⏳ Please wait...' : (isLogin ? 'Login' : 'Register')}
+            {loading ? '⏳ Please wait... (Backend is waking up - free tier, may take 30-60s on first request)' : (isLogin ? 'Login' : 'Register')}
           </button>
+          
+          {loading && (
+            <div className="loading-info" style={{ fontSize: '12px', textAlign: 'center', marginTop: '10px', color: '#888' }}>
+              💡 First request may take up to 60 seconds due to free tier cold start
+            </div>
+          )}
         </form>
 
         <div className="auth-toggle">
