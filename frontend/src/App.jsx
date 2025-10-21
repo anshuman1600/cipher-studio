@@ -401,20 +401,20 @@ function App() {
     console.log('User confirmed:', confirmed);
     
     if (confirmed) {
-      console.log('Creating new EMPTY project with name:', newProjectName);
+      console.log('Creating new project with starter template:', newProjectName);
       
-      // Create completely EMPTY project (no default files)
-      setFiles(EMPTY_FILES);
-      setActiveFile('');
-      setSelectedItem('');
+      // Create new project with STARTER_TEMPLATE (not empty!)
+      setFiles(STARTER_TEMPLATE);
+      setActiveFile('App.js');
+      setSelectedItem('App.js');
       setProjectName(newProjectName.trim());
       setCurrentProjectId(null); // ← IMPORTANT: Clear cloud link so next save creates NEW project
       
       // Update localStorage WITHOUT projectId (fresh project)
       const localProject = {
         name: newProjectName.trim(),
-        files: EMPTY_FILES,
-        activeFile: '',
+        files: STARTER_TEMPLATE,
+        activeFile: 'App.js',
         // NO projectId - this is a fresh project
         savedAt: new Date().toISOString(),
       };
